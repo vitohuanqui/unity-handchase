@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Plugins\Android\AndroidManifest-main.xml">
+    <Files>
+      <File FileName="Assets\mouseDrag.cs" Line="1" Column="1" />
+      <File FileName="Assets\cameraRotate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Client.cs" Line="1" Column="1" />
+      <File FileName="Assets\CubeTriggered.cs" Line="1" Column="1" />
+      <File FileName="Assets\OnClick.cs" Line="1" Column="1" />
+      <File FileName="Assets\moveHands.cs" Line="1" Column="1" />
+      <File FileName="Assets\Plugins\Android\AndroidManifest-main.xml" Line="30" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
