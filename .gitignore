@@ -1,3 +1,6 @@
 Temp/
 Assets/GoogleVR/
 Library/ShaderCache/
+
+*.apk
+*.log
