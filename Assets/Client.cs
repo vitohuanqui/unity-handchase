@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VR;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -63,6 +64,7 @@ public class Client : MonoBehaviour {
 	}
 
 	void Start(){
+		VRSettings.enabled = true;
 		PlayerPrefs.SetInt ("started", 0);
 		cubos = GameObject.FindGameObjectsWithTag("cubo").ToList();
 		Physics.gravity = new Vector3(0.0f,0.0f,20f);
