@@ -133,6 +133,7 @@ public class Client : MonoBehaviour {
 			obj.GetComponent<Renderer> ().material.color = c;
 			vec = new Vector3 (vec.x+vectors[i][j][k].x,(vec.y+vectors[i][j][k].y*-1),vec.z+vectors[i][j][k].z);
 			//obj.transform.position = new Vector3 (positions[i][j].x, positions[i][j].y, positions[i][j].z);
+			Vector3 vec_rot = Camera.main.transform.rotation;
 			obj.transform.position = new Vector3 (vec.x,vec.y,vec.z);
 			k++;
 			if (k == 4) {
@@ -160,8 +161,9 @@ public class Client : MonoBehaviour {
 		//Check how much bytes are recieved and call EndRecieve to finalize handshake
 		int recieved = _clientSocket.EndReceive(AR);
 
-		if(recieved <= 0)
+		if (recieved <= 0) {
 			return;
+		}
 		//Copy the recieved data into new buffer , to avoid null bytes
 		byte[] recData = new byte[recieved];
 		Buffer.BlockCopy(_recieveBuffer,0,recData,0,recieved);
