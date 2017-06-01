@@ -127,14 +127,14 @@ public class Client : MonoBehaviour {
 			}
 		}			
 
-		Vector3 vec = new Vector3 (positions [i] [j].x, 600 - positions [i] [j].y,positions [i] [j].z);
+		Vector3 vec = new Vector3 (positions [i] [j].x, positions [i] [j].y,positions [i] [j].z);
 		foreach (GameObject obj in objs) {
 			obj.tag = "bolitas";
 			obj.GetComponent<Renderer> ().material.color = c;
 			vec = new Vector3 (vec.x+vectors[i][j][k].x,(vec.y+vectors[i][j][k].y*-1),vec.z+vectors[i][j][k].z);
 			//obj.transform.position = new Vector3 (positions[i][j].x, positions[i][j].y, positions[i][j].z);
-			Vector3 vec_rot = Camera.main.transform.rotation;
-			obj.transform.position = new Vector3 (vec.x,vec.y,vec.z);
+			//obj.transform.parent = transform.parent;
+			obj.transform.localPosition = new Vector3 (vec.x*-1,vec.z*-1,vec.y+50);
 			k++;
 			if (k == 4) {
 				for (int t = 0; t < hands_selected.Count; t++) {
@@ -150,7 +150,7 @@ public class Client : MonoBehaviour {
 					i++;
 				}
 				if (i < 2) {
-					vec = new Vector3 (positions [i] [j].x, 600 - positions [i] [j].y, positions [i] [j].z);
+					vec = new Vector3 (positions [i] [j].x, positions [i] [j].y, positions [i] [j].z);
 				}
 			}
 		}

@@ -169,6 +169,7 @@
      <Compile Include="Assets\Scripts\ShowSliderValue.cs" />
      <Compile Include="Assets\Scripts\TiltWindow.cs" />
      <Compile Include="Assets\cameraRotate.cs" />
+     <Compile Include="Assets\debugtext.cs" />
      <Compile Include="Assets\disablevr.cs" />
      <Compile Include="Assets\mouseDrag.cs" />
      <Compile Include="Assets\moveHands.cs" />
