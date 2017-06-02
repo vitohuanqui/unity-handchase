@@ -9,6 +9,7 @@ public class CubeTriggered : MonoBehaviour {
 	Vector3 position=new Vector3(0,0,0);
 	Vector3 position_new_cube;
 	bool colition_flag;
+	float value = Mathf.PI / 4;
 	List<GameObject> parents_cube = new List<GameObject>();
 	void Start()
 	{
@@ -43,7 +44,7 @@ public class CubeTriggered : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		int started = PlayerPrefs.GetInt ("started");
-		Debug.Log ("emntro");
+		//Debug.Log ("entro");
 		if ((col.gameObject.tag == "dedos" && col.gameObject.GetComponent<Renderer> ().material.color == this.GetComponent<Renderer>().material.color) || (started != 1))
 		{
 			colliders++;
@@ -57,18 +58,25 @@ public class CubeTriggered : MonoBehaviour {
 			//		position.z+col.gameObject.transform.position.z);
 		}
 		if (col.gameObject.tag == "base_floot") {
-			transform.position = new Vector3 (transform.position.x, transform.position.y, -100);
-			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-			this.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+			calculate_new_position();
 			colliders = 0;
 		}
 	}
-
+	void calculate_new_position()
+	{
+		float angulo = Random.Range(-value, value);
+		float cosa = Mathf.Cos (angulo);
+		float sina = Mathf.Sin (angulo);
+		Vector2 new_vector = new Vector2 (Camera.main.transform.forward.x*cosa - Camera.main.transform.forward.y*sina,
+										  Camera.main.transform.forward.x*sina + Camera.main.transform.forward.y*cosa);
+		transform.position = new Vector3 (400*(new_vector.x), 650+400*(new_vector.y), -400);
+		transform.eulerAngles = Vector3.zero;
+		this.GetComponent<Rigidbody> ().velocity = new Vector3(0,0,Random.Range(0,100));
+		this.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+	}
 	void Update(){
 		if (colliders > 1) {
-			transform.position = new Vector3 (transform.position.x, 250, -100);
-			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-			this.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+			calculate_new_position();
 			colliders = 0;
 		}
 	}

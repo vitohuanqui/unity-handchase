@@ -82,7 +82,7 @@ public class Client : MonoBehaviour {
 		if (GameObject.FindGameObjectsWithTag ("dedos").Length == 0 && yellow == 1 && red == 1 && blue == 1 && white == 1) {
 			hands_selected.Clear ();
 			challenge++;
-			Debug.Log ("PASAMIS CHALLENGE");
+			//Debug.Log ("PASAMIS CHALLENGE");
 			if (challenge == 5) {
 				challenge = 1;
 				level++;
@@ -109,7 +109,7 @@ public class Client : MonoBehaviour {
 		Color c = new Color(0.0f, 0.0f, 0.0f);
 
 		if (started) {
-			c = new Color (0.0f, 1.0f, 0.0f);
+			c = new Color (0.02f, 0.82f, 0.91f);
 		} else {
 			if (real_read == 1) {
 				c = new Color (1.0f, 1.0f, 0.0f);
@@ -131,7 +131,7 @@ public class Client : MonoBehaviour {
 		foreach (GameObject obj in objs) {
 			obj.tag = "bolitas";
 			obj.GetComponent<Renderer> ().material.color = c;
-			vec = new Vector3 (vec.x+vectors[i][j][k].x,(vec.y+vectors[i][j][k].y*-1),vec.z+vectors[i][j][k].z);
+			vec = new Vector3 (vec.x+vectors[i][j][k].x,(vec.y+vectors[i][j][k].y),vec.z+vectors[i][j][k].z);
 			//obj.transform.position = new Vector3 (positions[i][j].x, positions[i][j].y, positions[i][j].z);
 			//obj.transform.parent = transform.parent;
 			obj.transform.localPosition = new Vector3 (vec.x*-1,vec.z*-1,vec.y+50);
