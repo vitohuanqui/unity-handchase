@@ -49,6 +49,7 @@ public class CubeTriggered : MonoBehaviour {
 		{
 			colliders++;
 			if (started == 1){
+				Camera.main.GetComponent<AudioSource> ().Play ();
 				PlayerPrefs.SetInt(this.GetComponent<Renderer>().material.name, 1);
 				col.gameObject.tag = "bolitas";
 			}

@@ -23,6 +23,12 @@ public class Client : MonoBehaviour {
 	List<int[]> hands_selected = new List<int[]>();
 	List<GameObject> cubos;
 
+	private int score = -1;
+	private float time = 20.0f;
+
+	private GameObject[] lines= new GameObject[40];
+	private LineRenderer[] newLine = new LineRenderer[40];
+
 	private void SetupServer(String ip_address)
 	{
 		objs = GameObject.FindGameObjectsWithTag("bolitas");
@@ -73,13 +79,50 @@ public class Client : MonoBehaviour {
 		PlayerPrefs.SetInt("red", 1);
 		PlayerPrefs.SetInt("blue", 1);
 		PlayerPrefs.SetInt("white", 1);
+		GameObject.Find ("score2").GetComponent<TextMesh> ().text = score.ToString();
+		GameObject.Find ("score3").GetComponent<TextMesh> ().text = time.ToString();
+		for (int i=0; i<lines.Length; i++) {
+			lines[i] = new GameObject();
+		}
+		for (int i=0; i<lines.Length; i++) {
+			newLine[i] = lines[i].AddComponent<LineRenderer> ();
+			newLine[i].SetWidth (3.0f, 3.0f);
+		}
+	}
+	void gameover(){
+		score = -1;
+		time = 20.0f;
+		started = false;
+		PlayerPrefs.SetInt ("started", 0);
+		level = 0;
+		real_read = 0;
+		time_read = 0;
+		level = 1;
+		challenge = 0;
+		completed = false;
+		PlayerPrefs.SetInt("yellow", 1);
+		PlayerPrefs.SetInt("red", 1);
+		PlayerPrefs.SetInt("blue", 1);
+		PlayerPrefs.SetInt("white", 1);
+		GameObject.Find ("score3").GetComponent<TextMesh> ().text = time.ToString();
+		hands_selected.Clear ();
+		List<GameObject> to_bolita = GameObject.FindGameObjectsWithTag("dedos").ToList();
+		foreach (GameObject obj in to_bolita) {
+			obj.tag = "bolitas"; 
+		}
 	}
 	void Update(){
 		int yellow = PlayerPrefs.GetInt("yellow");
 		int red = PlayerPrefs.GetInt("red");
 		int blue = PlayerPrefs.GetInt("blue");
 		int white = PlayerPrefs.GetInt("white");
+		if (time < 0) {
+			gameover ();
+		}
 		if (GameObject.FindGameObjectsWithTag ("dedos").Length == 0 && yellow == 1 && red == 1 && blue == 1 && white == 1) {
+			time += 10.0f;
+			score += 1;
+			GameObject.Find ("score2").GetComponent<TextMesh> ().text = score.ToString();
 			hands_selected.Clear ();
 			challenge++;
 			//Debug.Log ("PASAMIS CHALLENGE");
@@ -106,9 +149,12 @@ public class Client : MonoBehaviour {
 		int i = 0;
 		int j = 0;
 		int k = 0;
+		int l = 0;
 		Color c = new Color(0.0f, 0.0f, 0.0f);
 
 		if (started) {
+			time -= Time.deltaTime;
+			GameObject.Find ("score3").GetComponent<TextMesh> ().text = time.ToString();
 			c = new Color (0.02f, 0.82f, 0.91f);
 		} else {
 			if (real_read == 1) {
@@ -128,6 +174,7 @@ public class Client : MonoBehaviour {
 		}			
 
 		Vector3 vec = new Vector3 (positions [i] [j].x, positions [i] [j].y,positions [i] [j].z);
+		GameObject old_obj = new GameObject();
 		foreach (GameObject obj in objs) {
 			obj.tag = "bolitas";
 			obj.GetComponent<Renderer> ().material.color = c;
@@ -135,6 +182,11 @@ public class Client : MonoBehaviour {
 			//obj.transform.position = new Vector3 (positions[i][j].x, positions[i][j].y, positions[i][j].z);
 			//obj.transform.parent = transform.parent;
 			obj.transform.localPosition = new Vector3 (vec.x*-1,vec.z*-1,vec.y+50);
+			if (k != 0) {
+				newLine [l].SetPosition (0, old_obj.transform.position);
+				newLine [l].SetPosition (1, obj.transform.position);
+			}
+			l++;
 			k++;
 			if (k == 4) {
 				for (int t = 0; t < hands_selected.Count; t++) {
@@ -153,6 +205,7 @@ public class Client : MonoBehaviour {
 					vec = new Vector3 (positions [i] [j].x, positions [i] [j].y, positions [i] [j].z);
 				}
 			}
+			old_obj = obj;
 		}
 	}
 
