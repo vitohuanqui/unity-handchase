@@ -70,6 +70,7 @@ public class Client : MonoBehaviour {
 	}
 
 	void Start(){
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		VRSettings.enabled = true;
 		PlayerPrefs.SetInt ("started", 0);
 		cubos = GameObject.FindGameObjectsWithTag("cubo").ToList();
@@ -79,6 +80,7 @@ public class Client : MonoBehaviour {
 		PlayerPrefs.SetInt("red", 1);
 		PlayerPrefs.SetInt("blue", 1);
 		PlayerPrefs.SetInt("white", 1);
+		PlayerPrefs.SetInt("maxscore", 0);
 		GameObject.Find ("score2").GetComponent<TextMesh> ().text = score.ToString();
 		GameObject.Find ("score3").GetComponent<TextMesh> ().text = time.ToString();
 		for (int i=0; i<lines.Length; i++) {
@@ -90,6 +92,11 @@ public class Client : MonoBehaviour {
 		}
 	}
 	void gameover(){
+		int score_tmp = PlayerPrefs.GetInt ("maxscore");
+		if (score > score_tmp) {
+			PlayerPrefs.SetInt ("maxscore", score);
+			GameObject.Find ("score1").GetComponent<TextMesh> ().text = score.ToString();
+		}
 		score = -1;
 		time = 20.0f;
 		started = false;
