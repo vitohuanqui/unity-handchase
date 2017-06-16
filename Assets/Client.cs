@@ -223,30 +223,31 @@ public class Client : MonoBehaviour {
 
 		byte[] tmp_ = new List<byte> (recData).GetRange (0, 4).ToArray ();
 		int package_type = BitConverter.ToInt32 (tmp_, 0);
-		int[] finger_ord = new  int[10];
+
+		/*int[] finger_ord = new  int[10];
 		for (int i = 0; i < 10; i++) {
 			tmp_ = new List<byte> (recData).GetRange((i*4)+4, 4).ToArray ();
 			finger_ord[i] = BitConverter.ToInt32 (tmp_, 0);
-		}
+		}*/
 
-		tmp_ = new List<byte> (recData).GetRange (44, 4).ToArray ();
+		tmp_ = new List<byte> (recData).GetRange (4, 4).ToArray ();
 		real_read = BitConverter.ToInt32 (tmp_, 0);
 		float x, y, z;
 		int dedo = 0;
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k=0; k < 4; k++) {
-					x = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+48);
+					x = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+8);
 					dedo = dedo + 1;
-					y = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+48);
+					y = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+8);
 					dedo = dedo + 1;
-					z = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+48);
+					z = System.BitConverter.ToSingle (recData, ((i*4*3*4*5)+(j*4*3*4)+(k*12)+(4*dedo))+8);
 					dedo = 0;
 					vectors [i] [j] [k] = new Vector3(x, y, z);
 				}
 			}
 		}
-		int pos = 48 + (2*5*4*3*4);
+		int pos = 8 + (2*5*4*3*4);
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				x = System.BitConverter.ToSingle (recData, ((i*4*3*5)+(j*4*3)+(4*dedo))+pos);

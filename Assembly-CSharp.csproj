@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A7671B33-1A55-2BA6-C209-458FBDEB8CEF}</ProjectGuid>
+    <ProjectGuid>{759A7F8F-2BDB-6BAD-B6F3-ED6C980A2C68}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -214,7 +214,7 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="Google.ProtocolBuffers">
- <HintPath>D:/vito/HandChase/Assets/Plugins/Google.ProtocolBuffers.dll</HintPath>
+ <HintPath>D:/10 - Semestre X/Programación de Dispositivos Móviles/Unity/unity-handchase/Assets/Plugins/Google.ProtocolBuffers.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
